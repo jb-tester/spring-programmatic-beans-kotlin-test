@@ -5,6 +5,7 @@ import org.junit.jupiter.api.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
+import java.util.function.Supplier
 import kotlin.test.assertEquals
 
 @SpringBootTest
@@ -21,6 +22,8 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var foo5: Foo5
     @Autowired private lateinit var foo6: Foo6
     @Autowired private lateinit var foo7: Foo7
+    @Autowired private lateinit var foo8: Supplier<Foo8>
+    @Autowired private lateinit var foo9: Foo9
 
     // multiple dependencies:
     @Autowired private lateinit var boo: Boo
@@ -49,6 +52,8 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
         assertNotNull(foo5)
         assertNotNull(foo6)
         assertNotNull(foo7)
+        assertNotNull(foo8)
+        assertNotNull(foo9)
         assertNotNull(boo)
         assertNotNull(bar1)
         assertNotNull(bar2)

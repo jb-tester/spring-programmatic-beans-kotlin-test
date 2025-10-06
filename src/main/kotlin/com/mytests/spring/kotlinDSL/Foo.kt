@@ -30,3 +30,15 @@ class Foo7{
 fun foo7(): Foo7 {
     return Foo7()
 }
+class Foo8{
+    override fun toString(): String { return "foo8"}
+}
+
+class Foo9{
+    override fun toString(): String { return "foo9"}
+}
+class Foo9Factory{
+    fun foo9(): Foo9 {
+        return Foo9()
+    }
+}
