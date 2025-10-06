@@ -17,7 +17,9 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // bean of Foo6 type is recognized, name is ignored:
     registerBean<Foo6, String>(f = {str -> Foo6(str)}, name = "foo6")
 
-    registerBean<Boo> { Boo(bean(), bean(), bean(), bean(), bean(), bean()) }
+    // implicit name, type from function
+    registerBean(::foo7)
+    registerBean<Boo> { Boo(bean(), bean(), bean(), bean(), bean(), bean(), bean()) }
 
     // primary bean is not detected:
     registerBean<Bar1>(name = "bar11", primary = true) { Bar1(bean<Foo1>(),1) }
@@ -39,4 +41,8 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     }
     // configurationProperties: ok
     registerBean<ConfProperties>()
+
+    registerBean(::myRouter)
+    registerBean(::booRouter)
+
 })

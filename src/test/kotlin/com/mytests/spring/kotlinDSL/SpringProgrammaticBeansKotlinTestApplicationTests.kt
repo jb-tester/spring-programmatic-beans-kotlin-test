@@ -20,6 +20,7 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var foo4: Foo4
     @Autowired private lateinit var foo5: Foo5
     @Autowired private lateinit var foo6: Foo6
+    @Autowired private lateinit var foo7: Foo7
 
     // multiple dependencies:
     @Autowired private lateinit var boo: Boo
@@ -47,6 +48,7 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
         assertNotNull(foo4)
         assertNotNull(foo5)
         assertNotNull(foo6)
+        assertNotNull(foo7)
         assertNotNull(boo)
         assertNotNull(bar1)
         assertNotNull(bar2)
