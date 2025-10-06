@@ -17,8 +17,10 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // bean of Foo6 type is recognized, name is ignored:
     registerBean<Foo6, String>(f = {str -> Foo6(str)}, name = "foo6")
 
-    // implicit name, type from function
+    // implicit name (com.mytests.spring.kotlinDSL.Foo7#0), type from function (Foo7) - not detected
     registerBean(::foo7)
+
+    // bean depends on all beans above
     registerBean<Boo> { Boo(bean(), bean(), bean(), bean(), bean(), bean(), bean()) }
 
     // primary bean is not detected:
@@ -42,6 +44,7 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // configurationProperties: ok
     registerBean<ConfProperties>()
 
+    // routers: not detected
     registerBean(::myRouter)
     registerBean(::booRouter)
 
