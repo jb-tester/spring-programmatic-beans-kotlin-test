@@ -51,6 +51,8 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     profile("p2") {
         registerBean<BuzzService> { Buzz2("buzzP2") }
     }
+    registerBean<BuzzService>{ Buzz3("buzzzz") }
+
     // configurationProperties: ok
     registerBean<ConfProperties>()
 

@@ -38,7 +38,9 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var buzz: BuzzService
 
     // instantiated by specific implementation:
+    @Autowired private lateinit var buzz3: Buzz3
     @Autowired private lateinit var buzz2: Buzz2
+
 
     @Autowired private lateinit var confProperties: ConfProperties
 
@@ -59,6 +61,7 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
         assertNotNull(bar2)
         assertNotNull(buzz)
         assertNotNull(buzz2)
+        assertNotNull(buzz3)
     }
 
     @Test
