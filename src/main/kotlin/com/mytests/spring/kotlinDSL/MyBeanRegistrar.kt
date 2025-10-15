@@ -59,5 +59,5 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // routers: not detected - fixed
     registerBean(::myRouter)
     registerBean(::booRouter)
-
+    registerBean(::newRouter)
 })

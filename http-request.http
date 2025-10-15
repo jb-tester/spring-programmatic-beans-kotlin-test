@@ -7,5 +7,11 @@ GET http://localhost:8080/boo
 GET http://localhost:8080/
 
 
+###
+GET http://localhost:8080/new/test/111
+
+###
+POST http://localhost:8080/new/test
+
 
 ###
