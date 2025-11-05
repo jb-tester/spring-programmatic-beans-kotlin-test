@@ -46,12 +46,14 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // conditions are ignored
     // beans autowiring by implementation type doesn't work
     profile("p1") {
-        registerBean<BuzzService> { Buzz1("buzzP1") }
+        registerBean<DummyService> { Dummy1("buzzP1") }
     }
     profile("p2") {
-        registerBean<BuzzService> { Buzz2("buzzP2") }
+        registerBean<DummyService> { Dummy2("buzzP2") }
     }
-    registerBean<BuzzService>{ Buzz3("buzzzz") }
+    registerBean<BuzzService>{ Buzz1("buzzz1") }
+    registerBean<BuzzService>{ Buzz2("buzzz2") }
+    registerBean<BuzzService>{ Buzz3("buzzz3") }
 
     // configurationProperties: ok
     registerBean<ConfProperties>()
