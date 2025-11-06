@@ -14,7 +14,9 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // beans are not recognized - fixed
     registerBean("foo3") { Foo3() }
     registerBean(name ="foo4", supplier = { Foo4() })
-    // bean is considered to be of type `kotlin.reflect.KFunction0<? extends com.mytests.spring.kotlinDSL.Foo5>`
+
+    // The registered methods below are invalid for in the latest versions (https://github.com/spring-projects/spring-framework/issues/35694)
+    /*// bean is considered to be of type `kotlin.reflect.KFunction0<? extends com.mytests.spring.kotlinDSL.Foo5>`
     registerBean(f = ::Foo5, name = "foo5")
     // bean of Foo6 type is recognized, name is ignored - fixed
     registerBean<Foo6, String>(f = {str -> Foo6(str)}, name = "foo6")
@@ -24,10 +26,11 @@ class MyBeanRegistrar : BeanRegistrarDsl({
 
     // implicit name (com.mytests.spring.kotlinDSL.Foo7#0), type from function (Foo7) - not detected:
     // instead, the bean name is considered to be `foo7`, and type - `kotlin.reflect.KFunction0<? extends com.mytests.spring.kotlinDSL.Foo7>`
-    registerBean(::foo7)
+    registerBean(::foo7)*/
 
     // bean depends on all beans above
-    registerBean<Boo> { Boo(bean(), bean(), bean(), bean(), bean(), bean(), bean()) }
+    //registerBean<Boo> { Boo(bean(), bean(), bean(), bean(), bean(), bean(), bean()) }
+    registerBean<Boo> { Boo(bean(), bean(), bean(), bean()) }
 
     registerBean<Supplier<Foo8>>(name = "foo8supplier") {
         Supplier<Foo8> { Foo8() }
@@ -59,7 +62,10 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     registerBean<ConfProperties>()
 
     // routers: not detected - fixed
-    registerBean(::myRouter)
-    registerBean(::booRouter)
-    registerBean(::newRouter)
+   // registerBean(::myRouter) // worked before RC2
+    registerBean{myRouter()} // works with the latest versions
+    //registerBean(::booRouter) // worked before RC2
+    registerBean{booRouter(bean<Boo>())} // works with the latest versions
+    //registerBean(::newRouter) // works with the latest versions
+    registerBean{newRouter()} // works with the latest versions
 })

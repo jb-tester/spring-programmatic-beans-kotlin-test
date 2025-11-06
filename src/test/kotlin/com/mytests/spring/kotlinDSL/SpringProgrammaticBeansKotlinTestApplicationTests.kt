@@ -19,11 +19,12 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var foo2: Foo2
     @Autowired private lateinit var foo3: Foo3
     @Autowired private lateinit var foo4: Foo4
-    @Autowired private lateinit var foo5: Foo5
-    @Autowired private lateinit var foo6: Foo6
-    @Autowired private lateinit var foo7: Foo7
     @Autowired private lateinit var foo8: Supplier<Foo8>
-    @Autowired private lateinit var foo9: Foo9
+    // removed in the latest versions:
+    //  @Autowired private lateinit var foo9: Foo9
+    // @Autowired private lateinit var foo5: Foo5
+    // @Autowired private lateinit var foo6: Foo6
+    //  @Autowired private lateinit var foo7: Foo7
 
     // multiple dependencies:
     @Autowired private lateinit var boo: Boo
@@ -35,11 +36,12 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var bar2: Bar2
 
     // conditional, profile specific:
-    @Autowired private lateinit var buzz: BuzzService
+    @Autowired private lateinit var dummy: DummyService
 
     // instantiated by specific implementation:
     @Autowired private lateinit var buzz3: Buzz3
     @Autowired private lateinit var buzz2: Buzz2
+    @Autowired private lateinit var buzz1: Buzz1
 
 
     @Autowired private lateinit var confProperties: ConfProperties
@@ -51,17 +53,18 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
         assertNotNull(foo2)
         assertNotNull(foo3)
         assertNotNull(foo4)
-        assertNotNull(foo5)
-        assertNotNull(foo6)
-        assertNotNull(foo7)
         assertNotNull(foo8)
-        assertNotNull(foo9)
         assertNotNull(boo)
         assertNotNull(bar1)
         assertNotNull(bar2)
-        assertNotNull(buzz)
+        assertNotNull(dummy)
+        assertNotNull(buzz1)
         assertNotNull(buzz2)
         assertNotNull(buzz3)
+//        assertNotNull(foo5)
+//        assertNotNull(foo6)
+//        assertNotNull(foo7)
+//        assertNotNull(foo9)
     }
 
     @Test
