@@ -3,6 +3,7 @@ package com.mytests.spring.kotlinDSL
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import java.util.function.Supplier
@@ -37,6 +38,10 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
 
     // conditional, profile specific:
     @Autowired private lateinit var dummy: DummyService
+    // conditional, if-else-if-else:
+    @Autowired private lateinit var qwerty: QwertyService
+    // conditional, when-else
+    @Autowired private lateinit var asdf: AsdfService
 
     // instantiated by specific implementation:
     @Autowired private lateinit var buzz3: Buzz3
@@ -45,6 +50,23 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
 
 
     @Autowired private lateinit var confProperties: ConfProperties
+
+    // see the cases from NewBeanRegistrar:
+    // beans registered using registerBean(String name, Class<T> beanClass) or registerBean(Class<T> beanClass) are not resolved
+    @Autowired private lateinit var zxcv1: Zxcv1
+    @Autowired private lateinit var zxcv2: Zxcv2
+    @Autowired private lateinit var clazz1: Clazz1
+    @Autowired private lateinit var clazz2: Clazz2
+
+    @Autowired private lateinit var zxcv5List: List<Zxcv5>;
+
+    // ok if registerBean(String name, Class<T> beanClass, Consumer<Spec<T>> customizer);
+    @Autowired private lateinit var zxcv3Any: Zxcv3 // navigates to primary - ok
+    @Autowired private lateinit var zxcv4: Zxcv4
+    @Autowired private lateinit var zxcv: ZxcvService
+
+    // qualifier by name: since incorrect name is detected, autowiring fails
+    @Autowired @Qualifier("zxcv3") private lateinit var zxcv3: Zxcv3
 
     @Test
     fun testNotNullBeans() {
@@ -65,6 +87,18 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
 //        assertNotNull(foo6)
 //        assertNotNull(foo7)
 //        assertNotNull(foo9)
+        assertNotNull(clazz1)
+        assertNotNull(clazz2)
+        assertNotNull(zxcv1)
+        assertNotNull(zxcv2)
+        assertNotNull(zxcv3)
+        assertEquals("zxcv3", zxcv3.str)
+        assertNotNull(zxcv3Any)
+        assertEquals("zxcvPrim", zxcv3Any.str)
+        assertNotNull(zxcv4)
+        assertNotNull(zxcv)
+        assertNotNull(zxcv5List)
+        assertEquals(3, zxcv5List.size)
     }
 
     @Test

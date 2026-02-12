@@ -2,6 +2,7 @@ package com.mytests.spring.kotlinDSL
 
 import org.springframework.beans.factory.BeanRegistrarDsl
 import java.util.function.Supplier
+import kotlin.jvm.java
 
 class MyBeanRegistrar : BeanRegistrarDsl({
     // bean is not recognized - fixed
@@ -14,6 +15,7 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     // beans are not recognized - fixed
     registerBean("foo3") { Foo3() }
     registerBean(name ="foo4", supplier = { Foo4() })
+
 
     // The registered methods below are invalid for in the latest versions (https://github.com/spring-projects/spring-framework/issues/35694)
     /*// bean is considered to be of type `kotlin.reflect.KFunction0<? extends com.mytests.spring.kotlinDSL.Foo5>`
@@ -54,6 +56,23 @@ class MyBeanRegistrar : BeanRegistrarDsl({
     profile("p2") {
         registerBean<DummyService> { Dummy2("buzzP2") }
     }
+    if (env.getProperty("custom.config.p1").equals("aaa")) {
+        registerBean<QwertyService>{ Qwerty3("qweAAA") }
+    }
+    else {
+        if (env.getProperty("custom.config.p1").equals("bbb")) {
+            registerBean<QwertyService>{ Qwerty1("qweBBB") }
+        }
+        else {
+            registerBean<QwertyService>{ Qwerty2("qweOther") }
+        }
+    }
+    when (env.getProperty("custom.config.p2")) {
+        "aaa" -> {registerBean<AsdfService>{Asdf1("asdfAaa")}}
+        "bbb" -> {registerBean<AsdfService>{Asdf2("asdfBbb")}}
+        else -> {registerBean<AsdfService>{Asdf3("asdfOther")}}
+    }
+    // registration by supertype + specific subtype initialization: autowiring errors
     registerBean<BuzzService>{ Buzz1("buzzz1") }
     registerBean<BuzzService>{ Buzz2("buzzz2") }
     registerBean<BuzzService>{ Buzz3("buzzz3") }
