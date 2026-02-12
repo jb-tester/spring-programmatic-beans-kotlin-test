@@ -73,8 +73,8 @@ class MyBeanRegistrar : BeanRegistrarDsl({
         else -> {registerBean<AsdfService>{Asdf3("asdfOther")}}
     }
     // registration by supertype + specific subtype initialization: autowiring errors
-    registerBean<BuzzService>{ Buzz1("buzzz1") }
-    registerBean<BuzzService>{ Buzz2("buzzz2") }
+    registerBean<BuzzService>(name = "buzz1"){ Buzz1("buzzz1") }
+    registerBean<BuzzService>(name = "buzz2"){ Buzz2("buzzz2") }
     registerBean<BuzzService>{ Buzz3("buzzz3") }
 
     // configurationProperties: ok

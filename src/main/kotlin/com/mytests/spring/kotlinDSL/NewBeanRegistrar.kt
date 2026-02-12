@@ -12,7 +12,6 @@ class NewBeanRegistrar : BeanRegistrar {
         registry: BeanRegistry,
         env: Environment
     ) {
-        val property = env.getProperty("app.message-type", "email")
 
         // autowiring by type and by type+name don't work:
         // also, detected bean names ar T#0, T#1, ...
@@ -22,17 +21,16 @@ class NewBeanRegistrar : BeanRegistrar {
         registry.registerBean( Zxcv2::class.java)
 
         // if customizer is used, autowiring works:
-        // T#4
+        // but the names are still incorrect - T#4, T#5, ...
+        // https://youtrack.jetbrains.com/issue/IDEA-385864
         registry.registerBean("zxcvPrim", Zxcv3::class.java) { spec ->
             spec.supplier { Zxcv3("zxcvPrim") }
             spec.primary()
         }
-        // T#5
         registry.registerBean("zxcv3", Zxcv3::class.java) { spec ->
             spec.supplier { Zxcv3("zxcv3") }
         }
 
-        // T#6
         registry.registerBean("zxcv4", ZxcvService::class.java) { spec ->
             spec.supplier { Zxcv4("zxcv4") }
         }
