@@ -4,4 +4,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "spring-programmatic-beans-kotlin-test-RC1"
+rootProject.name = "spring-programmatic-beans-kotlin-test"
