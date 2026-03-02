@@ -54,7 +54,7 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
 
     // see the cases from NewBeanRegistrar:
     // beans registered using registerBean(String name, Class<T> beanClass) or registerBean(Class<T> beanClass) are not resolved
-    // https://youtrack.jetbrains.com/issue/IDEA-385861
+    // https://youtrack.jetbrains.com/issue/IDEA-385861 - fixed
     @Autowired private lateinit var zxcv1: Zxcv1
     @Autowired private lateinit var zxcv2: Zxcv2
     @Autowired private lateinit var clazz1: Clazz1
@@ -67,7 +67,7 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var zxcv4: Zxcv4
     @Autowired private lateinit var zxcv: ZxcvService
 
-    // qualifier by name: since incorrect name is detected, qualifier is not resolved   and autowiring fails
+    // qualifier by name: since incorrect name is detected, qualifier is not resolved and autowiring fails - fixed
     @Autowired @Qualifier("zxcv3") private lateinit var zxcv3: Zxcv3
 
     @Test
