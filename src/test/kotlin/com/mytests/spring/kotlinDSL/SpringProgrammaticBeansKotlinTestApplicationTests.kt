@@ -60,7 +60,9 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
     @Autowired private lateinit var clazz1: Clazz1
     @Autowired private lateinit var clazz2: Clazz2
 
-    @Autowired private lateinit var zxcv5List: List<Zxcv5>;
+    // conditional:
+    // ugly popup - https://youtrack.jetbrains.com/issue/IDEA-386556/Spring-Kotlin-programmatic-beans-registration-choose-bean...-popup-looks-ugly
+    @Autowired private lateinit var zxcv5_List: List<Zxcv5>;
 
     // ok if registerBean(String name, Class<T> beanClass, Consumer<Spec<T>> customizer);
     @Autowired private lateinit var zxcv3Any: Zxcv3 // navigates to primary - ok
@@ -99,8 +101,8 @@ class SpringProgrammaticBeansKotlinTestApplicationTests {
         assertEquals("zxcvPrim", zxcv3Any.str)
         assertNotNull(zxcv4)
         assertNotNull(zxcv)
-        assertNotNull(zxcv5List)
-        assertEquals(3, zxcv5List.size)
+        assertNotNull(zxcv5_List)
+        assertEquals(3, zxcv5_List.size)
     }
 
     @Test

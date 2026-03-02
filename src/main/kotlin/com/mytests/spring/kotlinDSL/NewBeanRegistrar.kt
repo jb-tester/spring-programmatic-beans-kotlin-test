@@ -18,7 +18,7 @@ class NewBeanRegistrar : BeanRegistrar {
         registry.registerBean("clazz1", Clazz1::class.java)
         registry.registerBean(Clazz2::class.java)
         registry.registerBean("zxcv1", Zxcv1::class.java)
-        registry.registerBean( Zxcv2::class.java)
+        registry.registerBean(Zxcv2::class.java)
 
         // if customizer is used, autowiring works:
         // but the names are still incorrect - T#4, T#5, ...
@@ -35,10 +35,19 @@ class NewBeanRegistrar : BeanRegistrar {
             spec.supplier { Zxcv4("zxcv4") }
         }
 
-        // java.util.List#0 - fixed
-        registry.registerBean("zxcv5List", object : ParameterizedTypeReference<List<Zxcv5>>() {}) { spec ->
-            spec.supplier { listOf<Zxcv5>( Zxcv5("aaa"), Zxcv5("bbb"), Zxcv5("ccc")) }
-        }
+        // conditional:
 
+        if (env.getProperty("custom.config.p1").equals("aaa")) {
+            // java.util.List#0 - fixed
+            registry.registerBean("zxcv5List", object : ParameterizedTypeReference<List<Zxcv5>>() {}) { spec ->
+                spec.supplier { listOf<Zxcv5>(Zxcv5("aaa1"), Zxcv5("bbb1"), Zxcv5("ccc1")) }
+                spec.description("list of zxcv5-type beans conditionally registered for p1=aaa")
+            }
+        } else {
+            registry.registerBean("zxcv5List2", object : ParameterizedTypeReference<List<Zxcv5>>() {}) { spec ->
+                spec.supplier { listOf<Zxcv5>(Zxcv5("aaa2"), Zxcv5("bbb2"), Zxcv5("ccc2")) }
+                spec.description("list of zxcv5-type beans registered for p1!=aaa")
+            }
+        }
     }
 }
